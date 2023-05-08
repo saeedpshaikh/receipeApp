@@ -21,12 +21,32 @@ android {
     }
 
     buildTypes {
+        debug {
+            versionNameSuffix ".dev"
+            debuggable true
+        }
+
         release {
             minifyEnabled false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
+    }
 
+    flavorDimensions "version"
+    productFlavors {
+        stage {
+            dimension "version"
+            manifestPlaceholders = [appLabel: "ReceipeApp - Stage"]
+            applicationIdSuffix ".stage"
+        }
+
+        prod {
+            dimension "version"
+            manifestPlaceholders = [appLabel: "ReceipeApp - Prod"]
+            applicationIdSuffix ".prod"
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
